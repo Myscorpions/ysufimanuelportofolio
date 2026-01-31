@@ -828,6 +828,38 @@ body::after {
   margin-left: 20px;
 }
 
+.lyric-line {
+    font-family: "Courier New", monospace;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--accent);
+    white-space: normal;
+    word-break: break-word;
+}
+
+.cursor1 {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: white;
+    margin-left: 4px;
+    vertical-align: bottom;
+    animation: blink 0.8s steps(1) infinite;
+}
+#lyric-text:empty + .cursor1 {
+    display: none;
+}
+
+#play-btn {
+   background-color: transparent;
+  border-radius: 3px;
+    margin-right: 8px;
+    color: pink;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-family: "Courier New", monospace;
+}
+
 .projects-container {
   display: grid;
   grid-template-columns: repeat(

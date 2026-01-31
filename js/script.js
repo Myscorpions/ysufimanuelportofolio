@@ -257,3 +257,52 @@ document.addEventListener('DOMContentLoaded', function () {
         );
     });
 });
+const audio = document.getElementById("bg-music");
+const lyricText = document.getElementById("lyric-text");
+const playBtn = document.getElementById("play-btn");
+
+const lyricsData = [
+    { time: 1, text: "I've been too busy, ignoring, and hiding" },
+    { time: 7, text: "About what my heart actually say" },
+    { time: 17, text: "Stay awake while" },
+    { time: 19, text: "I'm drowning on my thoughts" },
+    { time: 24, text: "Sometimes a happiness is just a happiness" },
+    { time: 35, text: "I've never been enjoyin' my serenity" },
+    { time: 41, text: "Even if I've got a lot of company" },
+    { time: 46, text: "That makes me happy" },
+    { time: 50, text: "Soul try to figure it out" },
+    { time: 55, text: "From where I've been escapin'" },
+    { time: 60, text: "Running to end all the sin" },
+    { time: 64, text: "Get away from the pressure" },
+    { time: 68, text: "Wondering to get a love that is so pure" },
+    { time: 76, text: "Gotta have to always make sure" },
+    { time: 80, text: "That I'm not just somebody's pleasure" }
+];
+
+let currentLine = 0;
+let isTyping = false;
+
+function typeWriter(text, i = 0) {
+    if (i < text.length) {
+        lyricText.textContent += text[i];
+        setTimeout(() => typeWriter(text, i + 1), 100);
+    } else {
+        isTyping = false;
+    }
+}
+
+audio.addEventListener("timeupdate", () => {
+    if (currentLine < lyricsData.length) {
+        if (audio.currentTime >= lyricsData[currentLine].time && !isTyping) {
+            isTyping = true;
+            lyricText.textContent = "";
+            typeWriter(lyricsData[currentLine].text);
+            currentLine++;
+        }
+    }
+});
+
+playBtn.addEventListener("click", () => {
+    playBtn.style.display = "none";
+    audio.play();
+});
